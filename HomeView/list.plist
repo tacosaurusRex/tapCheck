@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Preflight</key>
+	<dict>
+		<key>Sections</key>
+		<array>
+			<string>Cabin</string>
+			<string>Right Wing</string>
+			<string>Empennage</string>
+			<string>Left Wing</string>
+			<string>Nose</string>
+		</array>
+		<key>Items</key>
+		<array>
+			<array>
+				<dict>
+					<key>item</key>
+					<string>AROW Documents</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Maintenance Records</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Weight &amp; Balance</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Hobbs/Tach</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Control Wheel Lock</string>
+					<key>action</key>
+					<string>Remove</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Ignition</string>
+					<key>action</key>
+					<string>Verify OFF</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Avionics / Electrical Switches</string>
+					<key>action</key>
+					<string>OFF</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Master Switch</string>
+					<key>action</key>
+					<string>ON</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Flaps</string>
+					<key>action</key>
+					<string>Extend Full</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Avionics</string>
+					<key>action</key>
+					<string>ON</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Weather</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Avionics</string>
+					<key>action</key>
+					<string>OFF</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Lights</string>
+					<key>action</key>
+					<string>OFF</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Master Switch</string>
+					<key>action</key>
+					<string>OFF</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Fuel Valve</string>
+					<key>action</key>
+					<string>BOTH</string>
+				</dict>
+			</array>
+			<array>
+				<dict>
+					<key>item</key>
+					<string>Tie-Down</string>
+					<key>action</key>
+					<string>Remove</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Fuel Sump</string>
+					<key>action</key>
+					<string>Check Fuel</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Fuel Quantity</string>
+					<key>action</key>
+					<string>Measure Fuel</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Fuel Tank Cap</string>
+					<key>action</key>
+					<string>Secure</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Pitot Tube</string>
+					<key>action</key>
+					<string>Clear</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Fuel Vent</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Stall Warning</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Leading Edge</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Wing Tip / Lights</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Aileron</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Flap</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Wheel Chock</string>
+					<key>action</key>
+					<string>Remove</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Left Main Gear, Tire, Brake</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Fuselage</string>
+					<key>action</key>
+					<string>Check Rivets &amp; Skin</string>
+				</dict>
+			</array>
+			<array>
+				<dict>
+					<key>item</key>
+					<string>Tail Tie-Down</string>
+					<key>action</key>
+					<string>Remove</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Horizontal Stabilizer / Elevator</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Vertical Stabilizer / Rudder</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Trim Tab</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Antennas</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+			</array>
+			<array>
+				<dict>
+					<key>item</key>
+					<string>Fuselage</string>
+					<key>action</key>
+					<string>Check Rivets &amp; Skin</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Flap</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Aileron</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Wing Tip / Lights</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Leading Edge</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Fuel Sump</string>
+					<key>action</key>
+					<string>Check Fuel</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Fuel Quantity</string>
+					<key>action</key>
+					<string>Measure Fuel</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Fuel Tank Cap</string>
+					<key>action</key>
+					<string>Secure</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Tie-Down</string>
+					<key>action</key>
+					<string>Remove</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Wheel Chock</string>
+					<key>action</key>
+					<string>Remove</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Left Main Gear, Tire, Brake</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+			</array>
+			<array>
+				<dict>
+					<key>item</key>
+					<string>Cabin Air Intake</string>
+					<key>action</key>
+					<string>Secure</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Oil</string>
+					<key>action</key>
+					<string>5-7 Qts</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Fuel Sump</string>
+					<key>action</key>
+					<string>Check Fuel</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Exhaust Stack</string>
+					<key>action</key>
+					<string>Check For Cracks</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Windshield &amp; Cowling</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Alternator Belt</string>
+					<key>action</key>
+					<string>Check Tension</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Propeller / Spinner</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Landing Light</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Induction / Inlet Filter</string>
+					<key>action</key>
+					<string>Check Clear</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Nose Gear Tire</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Nose Strut</string>
+					<key>action</key>
+					<string>Check Inflation</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>APU Door</string>
+					<key>action</key>
+					<string>Closed</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Static Port</string>
+					<key>action</key>
+					<string>Clear</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Final 360 Walkaround</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+			</array>
+		</array>
+	</dict>
+</dict>
+</plist>
