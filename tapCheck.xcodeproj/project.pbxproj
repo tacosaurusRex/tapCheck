@@ -32,7 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C515A4B71AF03C17000FA653 /* HomeView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C515A4B71AF03C17000FA653 /* tapCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tapCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C515A4BB1AF03C17000FA653 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C515A4BC1AF03C17000FA653 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C515A4BE1AF03C17000FA653 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -42,7 +42,7 @@
 		C515A4C51AF03C17000FA653 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C515A4C71AF03C17000FA653 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C515A4CA1AF03C17000FA653 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		C515A4D01AF03C17000FA653 /* HomeViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomeViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C515A4D01AF03C17000FA653 /* tapCheckTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tapCheckTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C515A4D51AF03C17000FA653 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C515A4D61AF03C17000FA653 /* HomeViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewTests.m; sourceTree = "<group>"; };
 		C515A4EC1AF339E1000FA653 /* PreflightTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreflightTableViewController.h; sourceTree = "<group>"; };
@@ -85,8 +85,8 @@
 		C515A4B81AF03C17000FA653 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C515A4B71AF03C17000FA653 /* HomeView.app */,
-				C515A4D01AF03C17000FA653 /* HomeViewTests.xctest */,
+				C515A4B71AF03C17000FA653 /* tapCheck.app */,
+				C515A4D01AF03C17000FA653 /* tapCheckTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -143,9 +143,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C515A4B61AF03C17000FA653 /* HomeView */ = {
+		C515A4B61AF03C17000FA653 /* tapCheck */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C515A4DA1AF03C17000FA653 /* Build configuration list for PBXNativeTarget "HomeView" */;
+			buildConfigurationList = C515A4DA1AF03C17000FA653 /* Build configuration list for PBXNativeTarget "tapCheck" */;
 			buildPhases = (
 				C515A4B31AF03C17000FA653 /* Sources */,
 				C515A4B41AF03C17000FA653 /* Frameworks */,
@@ -155,14 +155,14 @@
 			);
 			dependencies = (
 			);
-			name = HomeView;
+			name = tapCheck;
 			productName = HomeView;
-			productReference = C515A4B71AF03C17000FA653 /* HomeView.app */;
+			productReference = C515A4B71AF03C17000FA653 /* tapCheck.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C515A4CF1AF03C17000FA653 /* HomeViewTests */ = {
+		C515A4CF1AF03C17000FA653 /* tapCheckTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C515A4DD1AF03C17000FA653 /* Build configuration list for PBXNativeTarget "HomeViewTests" */;
+			buildConfigurationList = C515A4DD1AF03C17000FA653 /* Build configuration list for PBXNativeTarget "tapCheckTests" */;
 			buildPhases = (
 				C515A4CC1AF03C17000FA653 /* Sources */,
 				C515A4CD1AF03C17000FA653 /* Frameworks */,
@@ -173,9 +173,9 @@
 			dependencies = (
 				C515A4D21AF03C17000FA653 /* PBXTargetDependency */,
 			);
-			name = HomeViewTests;
+			name = tapCheckTests;
 			productName = HomeViewTests;
-			productReference = C515A4D01AF03C17000FA653 /* HomeViewTests.xctest */;
+			productReference = C515A4D01AF03C17000FA653 /* tapCheckTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -209,8 +209,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C515A4B61AF03C17000FA653 /* HomeView */,
-				C515A4CF1AF03C17000FA653 /* HomeViewTests */,
+				C515A4B61AF03C17000FA653 /* tapCheck */,
+				C515A4CF1AF03C17000FA653 /* tapCheckTests */,
 			);
 		};
 /* End PBXProject section */
@@ -264,7 +264,7 @@
 /* Begin PBXTargetDependency section */
 		C515A4D21AF03C17000FA653 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C515A4B61AF03C17000FA653 /* HomeView */;
+			target = C515A4B61AF03C17000FA653 /* tapCheck */;
 			targetProxy = C515A4D11AF03C17000FA653 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -375,7 +375,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = HomeView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = tapCheck;
 			};
 			name = Debug;
 		};
@@ -385,14 +385,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = HomeView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = tapCheck;
 			};
 			name = Release;
 		};
 		C515A4DE1AF03C17000FA653 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -403,23 +402,22 @@
 				);
 				INFOPLIST_FILE = HomeViewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HomeView.app/HomeView";
+				PRODUCT_NAME = tapCheckTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tapCheck.app/tapCheck";
 			};
 			name = Debug;
 		};
 		C515A4DF1AF03C17000FA653 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = HomeViewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HomeView.app/HomeView";
+				PRODUCT_NAME = tapCheckTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tapCheck.app/tapCheck";
 			};
 			name = Release;
 		};
@@ -435,7 +433,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C515A4DA1AF03C17000FA653 /* Build configuration list for PBXNativeTarget "HomeView" */ = {
+		C515A4DA1AF03C17000FA653 /* Build configuration list for PBXNativeTarget "tapCheck" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C515A4DB1AF03C17000FA653 /* Debug */,
@@ -444,7 +442,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C515A4DD1AF03C17000FA653 /* Build configuration list for PBXNativeTarget "HomeViewTests" */ = {
+		C515A4DD1AF03C17000FA653 /* Build configuration list for PBXNativeTarget "tapCheckTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C515A4DE1AF03C17000FA653 /* Debug */,
