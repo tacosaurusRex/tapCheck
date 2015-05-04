@@ -196,7 +196,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C515A4B21AF03C17000FA653 /* Build configuration list for PBXProject "HomeView" */;
+			buildConfigurationList = C515A4B21AF03C17000FA653 /* Build configuration list for PBXProject "tapCheck" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -426,7 +426,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C515A4B21AF03C17000FA653 /* Build configuration list for PBXProject "HomeView" */ = {
+		C515A4B21AF03C17000FA653 /* Build configuration list for PBXProject "tapCheck" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C515A4D81AF03C17000FA653 /* Debug */,
@@ -442,6 +442,7 @@
 				C515A4DC1AF03C17000FA653 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C515A4DD1AF03C17000FA653 /* Build configuration list for PBXNativeTarget "HomeViewTests" */ = {
 			isa = XCConfigurationList;
@@ -450,6 +451,7 @@
 				C515A4DF1AF03C17000FA653 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
