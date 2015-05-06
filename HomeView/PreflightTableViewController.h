@@ -10,7 +10,7 @@
 #include "MyCustomCell.h"
 
 @interface PreflightTableViewController : UITableViewController
-@property NSArray * completedItems;
+@property NSMutableArray * completedItems;
 @property NSMutableArray* completedItems0;
 @property NSMutableArray* completedItems1;
 @property NSMutableArray* completedItems2;

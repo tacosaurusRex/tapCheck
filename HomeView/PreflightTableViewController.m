@@ -11,28 +11,24 @@
 
 @interface PreflightTableViewController ()
 
+@property int sectionCount;
+
 @end
 
 @implementation PreflightTableViewController
 
 - (void)viewDidLoad {
     NSLog(@"I am in viewDidLoad.\n");
-    NSLog(@"The contents of _completedItems[0] is %@", _completedItems[0]);
     self.title = @"Preflight";
     [super viewDidLoad];
-    
     [self loadData];
     NSLog(@"I'm back in viewDidLoad.\n");
-    self.tableView.rowHeight = 44;
     
-    int sectionCount = (int)[_itemsArray count];
- 
-    //NSLog(@"The number of sections in the preflight checklist is: %d\n", sectionCount);
-
+    self.tableView.rowHeight = 44;
+    _sectionCount = (int)[_itemsArray count];
     _sectionViewControllers = [[NSMutableArray alloc] init];
-
     int i;
-    for(i = 0 ; i < sectionCount ; i++) {
+    for(i = 0 ; i < _sectionCount ; i++) {
         SectionHeaderViewController *tmpSectionHeaderViewController =  [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"sectionHeader"];
         
         UILabel *tmpLabel = (UILabel *)[tmpSectionHeaderViewController.view viewWithTag:4];
@@ -40,18 +36,14 @@
         
         [_sectionViewControllers addObject:tmpSectionHeaderViewController];
     }
-    
-    _completedItems0 = [[NSMutableArray alloc] initWithArray:_completedItems[0]];
-    _completedItems1 = [[NSMutableArray alloc] initWithArray:_completedItems[1]];
-    _completedItems2 = [[NSMutableArray alloc] initWithArray:_completedItems[2]];
-    _completedItems3 = [[NSMutableArray alloc] initWithArray:_completedItems[3]];
-    _completedItems4 = [[NSMutableArray alloc] initWithArray:_completedItems[4]];
-    
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [self phaseComplete];
     NSLog(@"I'm done with viewDidLoad.\n");
 }
 
@@ -62,6 +54,14 @@
 
 - (void)loadData {
     NSLog(@"I am in loadData.\n");
+    
+    _completedItems0 = [[NSMutableArray alloc] init];
+    _completedItems1 = [[NSMutableArray alloc] init];
+    _completedItems2 = [[NSMutableArray alloc] init];
+    _completedItems3 = [[NSMutableArray alloc] init];
+    _completedItems4 = [[NSMutableArray alloc] init];
+    _completedItems = [NSMutableArray arrayWithObjects:_completedItems0, _completedItems1, _completedItems2, _completedItems3, _completedItems4, nil];
+
     NSString *PlistPath = [[NSBundle mainBundle] pathForResource:@"list" ofType:@"plist"];
     _rootDictionary = [[NSDictionary alloc] initWithContentsOfFile:PlistPath];
     _preflightDictionary = [[NSDictionary alloc] initWithDictionary:[_rootDictionary objectForKey:@"Preflight"]];
@@ -69,22 +69,9 @@
     _itemsArray = [[NSArray alloc] initWithObjects:[_preflightDictionary objectForKey:@"Items"], nil][0];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:[self userStateFilePath]]) {
-        _completedItems = [[NSArray alloc] initWithContentsOfFile:[self userStateFilePath]];
-        NSLog(@"_userStateArray created from plist");
+        _completedItems = [[NSMutableArray alloc] initWithContentsOfFile:[self userStateFilePath]];
+        NSLog(@"_completedItemsArray created from plist");
     }
-/*
-    NSLog(@"The size of _preflightArray is %lu.\n",_preflightArray.count);
-    NSLog(@"The contents of the _preflight dictionary are %@\n",_preflightDictionary);
-    
-    NSLog(@"The size of the _sectionHeaderArray is %lu\n",_sectionHeaderArray.count);
-    NSLog(@"The contents of _sectionHeaderArray is %@\n",_sectionHeaderArray);
-    
-    NSLog(@"The size of _itemsArray is %lu\n", _itemsArray.count);
-    NSLog(@"The contents of _itemsArray is %@\n", _itemsArray);
-
-    NSLog(@"The size of _userStateArray is %lu\n", _userStateArray.count);
-    NSLog(@"The contents of _userStateArray is %@\n", _userStateArray);
-*/
     NSLog(@"Done with loadData.\n");
 }
 
@@ -96,8 +83,7 @@
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
-    
-    _completedItems = [NSArray arrayWithObjects:_completedItems0, _completedItems1, _completedItems2, _completedItems3, _completedItems4, nil];
+    NSLog(@"I'm in viewWillDisappear");
     [_completedItems writeToFile:[self userStateFilePath] atomically:YES];
 }
 
@@ -115,50 +101,18 @@
     cell.actionLabel.text = [[[_itemsArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"action"];
 
     [cell setAccessoryType:UITableViewCellAccessoryNone];
+    
     NSNumber *rowNum = [NSNumber numberWithUnsignedInteger:indexPath.row];
-    switch (indexPath.section) {
-        case 0:
-            if ( [_completedItems0 containsObject:rowNum] ) {
+    int i = (int)indexPath.section;
+    for ( i = 0 ; i < _sectionCount ; i++) {
+        if ( i == indexPath.section ) {
+            if ([_completedItems[i] containsObject:rowNum]) {
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
             }
             else {
                 cell.accessoryType = UITableViewCellAccessoryNone;
             }
-            break;
-        case 1:
-            if ( [_completedItems1 containsObject:rowNum] ) {
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            }
-            else {
-                cell.accessoryType = UITableViewCellAccessoryNone;
-            }
-            break;
-        case 2:
-            if ( [_completedItems2 containsObject:rowNum] ) {
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            }
-            else {
-                cell.accessoryType = UITableViewCellAccessoryNone;
-            }
-            break;
-        case 3:
-            if ( [_completedItems3 containsObject:rowNum] ) {
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            }
-            else {
-                cell.accessoryType = UITableViewCellAccessoryNone;
-            }
-            break;
-        case 4:
-            if ( [_completedItems4 containsObject:rowNum] ) {
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            }
-            else {
-                cell.accessoryType = UITableViewCellAccessoryNone;
-            }
-            break;
-        default:
-        break;
+        }
     }
     return cell;
 }
@@ -172,21 +126,22 @@
     NSNumber *rowNumber = [NSNumber numberWithUnsignedInteger:indexPath.row];
     
     NSLog(@"The clicked cell is in section %ld, row %ld.\n", (long)indexPath.section, (long)indexPath.row);
-
-    switch (indexPath.section) {
-        case 0:
+    
+    int i = (int)indexPath.section;
+    for ( i = 0 ; i < _sectionCount ; i++) {
+        if (i == indexPath.section) {
             if (selectedCell.accessoryType == UITableViewCellAccessoryNone) {
                 selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
-                if ( [_completedItems0 containsObject:rowNumber] )
+                if ( [_completedItems[i] containsObject:rowNumber] )
                 { }
-                else { [_completedItems0 addObject:rowNumber]; }
+                else { [_completedItems[i] addObject:rowNumber]; }
             }
             else if (selectedCell.accessoryType == UITableViewCellAccessoryCheckmark) {
                 selectedCell.accessoryType = UITableViewCellAccessoryNone;
-                if ( [_completedItems0 containsObject:rowNumber] )
-                { [_completedItems0 removeObject:rowNumber]; }
+                if ( [_completedItems[i] containsObject:rowNumber] )
+                { [_completedItems[i] removeObject:rowNumber]; }
             }
-            if ( [_completedItems0 count] == [[_itemsArray objectAtIndex:indexPath.section] count]) {
+            if ( [_completedItems[i] count] == [[_itemsArray objectAtIndex:indexPath.section] count]) {
                 SectionHeaderViewController  * tmpSectionVC = [_sectionViewControllers objectAtIndex:indexPath.section];
                 UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
                 tmpLabel.backgroundColor = [UIColor greenColor];
@@ -196,149 +151,23 @@
                 UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
                 tmpLabel.backgroundColor = [UIColor clearColor];
             }
-            if ( [_completedItems0 count] == [[_itemsArray objectAtIndex:0] count]) {
+            if ( [_completedItems[i] count] == [_itemsArray[i] count]) {
                 _section0complete = true;
             }
             else {
                 _section0complete = false;
             }
-            NSLog(@"No. of items in _completedItems0 is %lu. _section0Complete is %s.\n", _completedItems0.count, _section0complete ? "true" : "false");
-            break;
-    
-        case 1:
-            if (selectedCell.accessoryType == UITableViewCellAccessoryNone)
-            {
-                selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
-                if ( [_completedItems1 containsObject:rowNumber] )
-                { }
-                else { [_completedItems1 addObject:rowNumber]; }
-            }
-            else if (selectedCell.accessoryType == UITableViewCellAccessoryCheckmark)
-            {
-                selectedCell.accessoryType = UITableViewCellAccessoryNone;
-                if ( [_completedItems1 containsObject:rowNumber] )
-                { [_completedItems1 removeObject:rowNumber]; }
-            }
-            if ( [_completedItems1 count] == [[_itemsArray objectAtIndex:indexPath.section] count]) {
-                SectionHeaderViewController  * tmpSectionVC = [_sectionViewControllers objectAtIndex:indexPath.section];
-                UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
-                tmpLabel.backgroundColor = [UIColor greenColor];
-            }
-            else {
-                SectionHeaderViewController  * tmpSectionVC = [_sectionViewControllers objectAtIndex:indexPath.section];
-                UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
-                tmpLabel.backgroundColor = [UIColor clearColor];
-            }
-            if ( [_completedItems1 count] == [[_itemsArray objectAtIndex:1] count]) {
-                _section1complete = true;
-            }
-            else {
-                _section1complete = false;
-            }
-            NSLog(@"No. of items in _completedItems1 is %lu. _section1Complete is %s.\n", _completedItems1.count, _section1complete ? "true" : "false");
-            break;
-            
-        case 2:
-            if (selectedCell.accessoryType == UITableViewCellAccessoryNone)
-            {
-                selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
-                if ( [_completedItems2 containsObject:rowNumber] )
-                { }
-                else { [_completedItems2 addObject:rowNumber]; }
-            }
-            else if (selectedCell.accessoryType == UITableViewCellAccessoryCheckmark)
-            {
-                selectedCell.accessoryType = UITableViewCellAccessoryNone;
-                if ( [_completedItems2 containsObject:rowNumber] )
-                { [_completedItems2 removeObject:rowNumber]; }
-            }
-            if ( [_completedItems2 count] == [[_itemsArray objectAtIndex:2] count]) {
-                SectionHeaderViewController  * tmpSectionVC = [_sectionViewControllers objectAtIndex:indexPath.section];
-                UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
-                tmpLabel.backgroundColor = [UIColor greenColor];
-            }
-            else {
-                SectionHeaderViewController  * tmpSectionVC = [_sectionViewControllers objectAtIndex:indexPath.section];
-                UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
-                tmpLabel.backgroundColor = [UIColor clearColor];
-            }
-            if ( [_completedItems2 count] == [[_itemsArray objectAtIndex:2] count]) {
-                _section2complete = true;
-            }
-            else {
-                _section2complete = false;
-            }
-            NSLog(@"No. of items in _completedItems2 is %lu. _section2Complete is %s.\n", _completedItems2.count, _section2complete ? "true" : "false");
-            break;
-            
-        case 3:
-            if (selectedCell.accessoryType == UITableViewCellAccessoryNone) {
-                selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
-                if ( [_completedItems3 containsObject:rowNumber] ) {
-                }
-                else {
-                    [_completedItems3 addObject:rowNumber];
-                }
-            }
-            else if (selectedCell.accessoryType == UITableViewCellAccessoryCheckmark) {
-                selectedCell.accessoryType = UITableViewCellAccessoryNone;
-                if ( [_completedItems3 containsObject:rowNumber] )
-                { [_completedItems3 removeObject:rowNumber]; }
-            }
-            if ( [_completedItems3 count] == [[_itemsArray objectAtIndex:indexPath.section] count]) {
-                SectionHeaderViewController  * tmpSectionVC = [_sectionViewControllers objectAtIndex:indexPath.section];
-                UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
-                tmpLabel.backgroundColor = [UIColor greenColor];
-            }
-            else {
-                SectionHeaderViewController  * tmpSectionVC = [_sectionViewControllers objectAtIndex:indexPath.section];
-                UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
-                tmpLabel.backgroundColor = [UIColor clearColor];
-            }
-            if ( [_completedItems3 count] == [[_itemsArray objectAtIndex:3] count]) {
-                _section3complete = true;
-            }
-            else {
-                _section3complete = false;
-            }
-            NSLog(@"No. of items in _completedItems3 is %lu. _section3Complete is %s.\n", _completedItems3.count, _section3complete ? "true" : "false");
-            break;
-            
-        case 4:
-            if (selectedCell.accessoryType == UITableViewCellAccessoryNone) {
-                selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
-                if ( [_completedItems4 containsObject:rowNumber] )
-                { }
-                else { [_completedItems4 addObject:rowNumber]; }
-            }
-            else if (selectedCell.accessoryType == UITableViewCellAccessoryCheckmark) {
-                selectedCell.accessoryType = UITableViewCellAccessoryNone;
-                if ( [_completedItems4 containsObject:rowNumber] )
-                { [_completedItems4 removeObject:rowNumber]; }
-            }
-            if ( [_completedItems4 count] == [[_itemsArray objectAtIndex:indexPath.section] count]) {
-                SectionHeaderViewController  * tmpSectionVC = [_sectionViewControllers objectAtIndex:indexPath.section];
-                UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
-                tmpLabel.backgroundColor = [UIColor greenColor];
-            }
-            else {
-                SectionHeaderViewController  * tmpSectionVC = [_sectionViewControllers objectAtIndex:indexPath.section];
-                UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
-                tmpLabel.backgroundColor = [UIColor clearColor];
-            }
-            if ( [_completedItems4 count] == [[_itemsArray objectAtIndex:4] count]) {
-                _section4complete = true;
-            }
-            else {
-                _section4complete = false;
-            }
-            NSLog(@"No. of items in _completedItems4 is %lu. _section4Complete is %s.\n", _completedItems4.count, _section4complete ? "true" : "false");
-            break;
 
-        default:
-        break;
+        }
     }
+    [self phaseComplete];
+}
+
+- (void) ifSectionComplete:(int)section {
     
+}
+
+- (void) phaseComplete {
     if (_section0complete == true && _section1complete == true && _section2complete == true && _section3complete == true && _section4complete == true) {
         self.title = @"Preflight - Complete";
         self.navigationController.navigationBar.barTintColor = [UIColor greenColor];
@@ -347,7 +176,6 @@
         self.title = @"Preflight";
         self.navigationController.navigationBar.barTintColor = nil;
     }
-    
 }
 
 #pragma mark - Section / Header Attributes
