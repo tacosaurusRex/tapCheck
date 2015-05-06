@@ -74,6 +74,9 @@
                                 <state key="normal" title="Options">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="7Sp-uL-gQK" kind="show" id="sZH-3w-Hgq"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -123,7 +126,7 @@
         <!--Table-->
         <scene sceneID="6eh-JD-JEc">
             <objects>
-                <tableViewController id="WdG-lB-VRj" customClass="PreflightTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="preflightTableView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WdG-lB-VRj" customClass="PreflightTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Ib7-ZP-PLn">
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -191,6 +194,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qBA-2v-xLt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="887" y="982"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="zyP-yf-jh8">
+            <objects>
+                <viewController id="7Sp-uL-gQK" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JtE-va-uZc"/>
+                        <viewControllerLayoutGuide type="bottom" id="OW0-Wv-NLq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3jj-d0-dGT">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Yd-9J-IF4">
+                                <rect key="frame" x="220" y="275" width="160" height="50"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="2uO-Oa-Zq8"/>
+                                    <constraint firstAttribute="height" constant="50" id="HXm-70-JcX"/>
+                                </constraints>
+                                <state key="normal" title="Reset">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="5Yd-9J-IF4" secondAttribute="centerX" id="DGQ-FZ-XZu"/>
+                            <constraint firstAttribute="centerY" secondItem="5Yd-9J-IF4" secondAttribute="centerY" id="dqH-gM-U0M"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HtV-2E-RaI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1583" y="1182"/>
         </scene>
     </scenes>
 </document>

@@ -10,22 +10,14 @@
 #import "SectionHeaderViewController.h"
 
 @interface PreflightTableViewController ()
-@property NSMutableArray* completedItems0;
-@property NSMutableArray* completedItems1;
-@property NSMutableArray* completedItems2;
-@property NSMutableArray* completedItems3;
-@property NSMutableArray* completedItems4;
-@property BOOL section0complete;
-@property BOOL section1complete;
-@property BOOL section2complete;
-@property BOOL section3complete;
-@property BOOL section4complete;
+
 @end
 
 @implementation PreflightTableViewController
 
 - (void)viewDidLoad {
     NSLog(@"I am in viewDidLoad.\n");
+    NSLog(@"The contents of _completedItems[0] is %@", _completedItems[0]);
     self.title = @"Preflight";
     [super viewDidLoad];
     
@@ -35,7 +27,7 @@
     
     int sectionCount = (int)[_itemsArray count];
  
-    NSLog(@"The number of sections in the preflight checklist is: %d\n", sectionCount);
+    //NSLog(@"The number of sections in the preflight checklist is: %d\n", sectionCount);
 
     _sectionViewControllers = [[NSMutableArray alloc] init];
 
@@ -49,11 +41,11 @@
         [_sectionViewControllers addObject:tmpSectionHeaderViewController];
     }
     
-    _completedItems0 = [[NSMutableArray alloc] init];
-    _completedItems1 = [[NSMutableArray alloc] init];
-    _completedItems2 = [[NSMutableArray alloc] init];
-    _completedItems3 = [[NSMutableArray alloc] init];
-    _completedItems4 = [[NSMutableArray alloc] init];
+    _completedItems0 = [[NSMutableArray alloc] initWithArray:_completedItems[0]];
+    _completedItems1 = [[NSMutableArray alloc] initWithArray:_completedItems[1]];
+    _completedItems2 = [[NSMutableArray alloc] initWithArray:_completedItems[2]];
+    _completedItems3 = [[NSMutableArray alloc] initWithArray:_completedItems[3]];
+    _completedItems4 = [[NSMutableArray alloc] initWithArray:_completedItems[4]];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -76,6 +68,11 @@
     _sectionHeaderArray = [[NSArray alloc] initWithObjects:[_preflightDictionary objectForKey:@"Sections"], nil][0];
     _itemsArray = [[NSArray alloc] initWithObjects:[_preflightDictionary objectForKey:@"Items"], nil][0];
     
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[self userStateFilePath]]) {
+        _completedItems = [[NSArray alloc] initWithContentsOfFile:[self userStateFilePath]];
+        NSLog(@"_userStateArray created from plist");
+    }
+/*
     NSLog(@"The size of _preflightArray is %lu.\n",_preflightArray.count);
     NSLog(@"The contents of the _preflight dictionary are %@\n",_preflightDictionary);
     
@@ -84,9 +81,25 @@
     
     NSLog(@"The size of _itemsArray is %lu\n", _itemsArray.count);
     NSLog(@"The contents of _itemsArray is %@\n", _itemsArray);
+
+    NSLog(@"The size of _userStateArray is %lu\n", _userStateArray.count);
+    NSLog(@"The contents of _userStateArray is %@\n", _userStateArray);
+*/
     NSLog(@"Done with loadData.\n");
 }
 
+- (NSString *)userStateFilePath {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    //NSLog(@"The documents directory path is %@", [documentsDirectory stringByAppendingPathComponent:@"userState.plist"]);
+    return [documentsDirectory stringByAppendingPathComponent:@"userState.plist"];
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    
+    _completedItems = [NSArray arrayWithObjects:_completedItems0, _completedItems1, _completedItems2, _completedItems3, _completedItems4, nil];
+    [_completedItems writeToFile:[self userStateFilePath] atomically:YES];
+}
 
 #pragma mark - Table view data source
 
@@ -397,21 +410,15 @@
 
  #pragma mark - Navigation
 
-- (NSString *)dataFilePath {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    return [documentsDirectory stringByAppendingPathComponent:@"listState.plist"];
-}
 
+/*
  // In a storyboard-based application, you will often want to do a little preparation before navigation
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-     
-     [_completedItems4 writeToFile:[self dataFilePath] atomically:YES];
-     NSLog(@"_completedItems4 written to plist");
+
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
  }
-
+*/
 
 
 @end
