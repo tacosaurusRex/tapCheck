@@ -16,11 +16,12 @@
 @property NSMutableArray* completedItems2;
 @property NSMutableArray* completedItems3;
 @property NSMutableArray* completedItems4;
-@property BOOL section0complete;
-@property BOOL section1complete;
-@property BOOL section2complete;
-@property BOOL section3complete;
-@property BOOL section4complete;
+@property NSMutableArray * sectionComplete;
+@property int sectionComplete0;
+@property int sectionComplete1;
+@property int sectionComplete2;
+@property int sectionComplete3;
+@property int sectionComplete4;
 @property NSMutableArray * listArray;
 @property NSDictionary * rootDictionary;
 @property NSDictionary * preflightDictionary;

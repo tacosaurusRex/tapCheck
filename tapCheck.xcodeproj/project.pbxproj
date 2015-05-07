@@ -19,6 +19,7 @@
 		C515A4F41AF33A1A000FA653 /* MyCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C515A4F31AF33A1A000FA653 /* MyCustomCell.m */; };
 		C515A4F61AF33A2F000FA653 /* MyCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C515A4F51AF33A2F000FA653 /* MyCustomCell.xib */; };
 		C515A4F81AF33BD6000FA653 /* list.plist in Resources */ = {isa = PBXBuildFile; fileRef = C515A4F71AF33BD6000FA653 /* list.plist */; };
+		C54BF2841AFAC6E6002F65B2 /* optionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C54BF2831AFAC6E6002F65B2 /* optionsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		C515A4F31AF33A1A000FA653 /* MyCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCustomCell.m; sourceTree = "<group>"; };
 		C515A4F51AF33A2F000FA653 /* MyCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCustomCell.xib; sourceTree = "<group>"; };
 		C515A4F71AF33BD6000FA653 /* list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = list.plist; sourceTree = "<group>"; };
+		C54BF2821AFAC6E6002F65B2 /* optionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = optionsViewController.h; sourceTree = "<group>"; };
+		C54BF2831AFAC6E6002F65B2 /* optionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = optionsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +109,8 @@
 				C515A4F01AF339F6000FA653 /* SectionHeaderViewController.m */,
 				C515A4EC1AF339E1000FA653 /* PreflightTableViewController.h */,
 				C515A4ED1AF339E1000FA653 /* PreflightTableViewController.m */,
+				C54BF2821AFAC6E6002F65B2 /* optionsViewController.h */,
+				C54BF2831AFAC6E6002F65B2 /* optionsViewController.m */,
 				C515A4C71AF03C17000FA653 /* Images.xcassets */,
 				C515A4C91AF03C17000FA653 /* LaunchScreen.xib */,
 				C515A4BA1AF03C17000FA653 /* Supporting Files */,
@@ -246,6 +251,7 @@
 				C515A4EE1AF339E1000FA653 /* PreflightTableViewController.m in Sources */,
 				C515A4F11AF339F6000FA653 /* SectionHeaderViewController.m in Sources */,
 				C515A4C01AF03C17000FA653 /* AppDelegate.m in Sources */,
+				C54BF2841AFAC6E6002F65B2 /* optionsViewController.m in Sources */,
 				C515A4BD1AF03C17000FA653 /* main.m in Sources */,
 				C515A4F41AF33A1A000FA653 /* MyCustomCell.m in Sources */,
 			);

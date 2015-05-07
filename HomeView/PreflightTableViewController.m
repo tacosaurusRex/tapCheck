@@ -36,13 +36,6 @@
         
         [_sectionViewControllers addObject:tmpSectionHeaderViewController];
     }
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
     [self phaseComplete];
     NSLog(@"I'm done with viewDidLoad.\n");
 }
@@ -120,9 +113,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    
     UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
-    
     NSNumber *rowNumber = [NSNumber numberWithUnsignedInteger:indexPath.row];
     
     NSLog(@"The clicked cell is in section %ld, row %ld.\n", (long)indexPath.section, (long)indexPath.row);
@@ -151,24 +142,28 @@
                 UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
                 tmpLabel.backgroundColor = [UIColor clearColor];
             }
-            if ( [_completedItems[i] count] == [_itemsArray[i] count]) {
-                _section0complete = true;
-            }
-            else {
-                _section0complete = false;
-            }
-
         }
     }
     [self phaseComplete];
 }
 
-- (void) ifSectionComplete:(int)section {
-    
-}
-
 - (void) phaseComplete {
-    if (_section0complete == true && _section1complete == true && _section2complete == true && _section3complete == true && _section4complete == true) {
+    
+    //bool sectComp[_sectionCount];
+    _sectionComplete = [[NSMutableArray alloc] init];
+    
+    int i;
+    for ( i = 0 ; i < _sectionCount ; i++ ) {
+        //NSLog(@"completedItems[%d] count %lu, itemsArray[%d] count %lu", i, (unsigned long)[_completedItems[i] count], i, (unsigned long)[_itemsArray[i] count]);
+        if ([_completedItems[i] count] == [_itemsArray[i] count]) {
+            [_sectionComplete addObject:[NSNumber numberWithInt:1]];
+        }
+        else {
+            [_sectionComplete addObject:[NSNumber numberWithInt:0]];
+        }
+    }
+    
+    if(![_sectionComplete containsObject:[NSNumber numberWithInt:0]]) {
         self.title = @"Preflight - Complete";
         self.navigationController.navigationBar.barTintColor = [UIColor greenColor];
     }
@@ -176,6 +171,7 @@
         self.title = @"Preflight";
         self.navigationController.navigationBar.barTintColor = nil;
     }
+    //NSLog(@"the contents of _sectionComplete are %@", _sectionComplete);
 }
 
 #pragma mark - Section / Header Attributes
@@ -198,6 +194,18 @@
 -(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 
     SectionHeaderViewController *tmpVC =[_sectionViewControllers objectAtIndex:section];
+    
+    if ( [_completedItems[section] count] == [_itemsArray[section] count]) {
+        SectionHeaderViewController  * tmpSectionVC = [_sectionViewControllers objectAtIndex:section];
+        UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
+        tmpLabel.backgroundColor = [UIColor greenColor];
+    }
+    else {
+        SectionHeaderViewController  * tmpSectionVC = [_sectionViewControllers objectAtIndex:section];
+        UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
+        tmpLabel.backgroundColor = [UIColor clearColor];
+    }
+
     return tmpVC.view;
 }
 
