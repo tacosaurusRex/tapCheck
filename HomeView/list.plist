@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>Preflight</key>
+<array>
 	<dict>
 		<key>Sections</key>
 		<array>
@@ -380,5 +379,328 @@
 			</array>
 		</array>
 	</dict>
-</dict>
+	<dict>
+		<key>Sections</key>
+		<array>
+			<string>Before Takeoff</string>
+			<string>Normal Takeoff</string>
+			<string>Cruise</string>
+		</array>
+		<key>Items</key>
+		<array>
+			<array>
+				<dict>
+					<key>item</key>
+					<string>Brakes</string>
+					<key>action</key>
+					<string>Set</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Flight Controls</string>
+					<key>action</key>
+					<string>Free and Correct</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Fuel Selector</string>
+					<key>action</key>
+					<string>BOTH</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Trim</string>
+					<key>action</key>
+					<string>Set For Takeoff</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Mixture</string>
+					<key>action</key>
+					<string>Adjust for DA</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Power</string>
+					<key>action</key>
+					<string>1700 RPM</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Ignition - 125 Max/50 Diff</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Carb Heat</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Engine Instruments</string>
+					<key>action</key>
+					<string>In The Green</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Ammeter</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Vacuum Indicator</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Throttle</string>
+					<key>action</key>
+					<string>1000 RPM</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Flight Instruments</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Heading Indicator</string>
+					<key>action</key>
+					<string>Set</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Comm / Navs</string>
+					<key>action</key>
+					<string>Set</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Flaps - Short or Soft Field</string>
+					<key>action</key>
+					<string>Set 10°</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Doors and Windows</string>
+					<key>action</key>
+					<string>Locked</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Landing Lights</string>
+					<key>action</key>
+					<string>ON</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Transponder</string>
+					<key>action</key>
+					<string>Altitude</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Traffic and Clearance</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+			</array>
+			<array>
+				<dict>
+					<key>item</key>
+					<string>Runway</string>
+					<key>action</key>
+					<string>Center Aligned</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Throttle</string>
+					<key>action</key>
+					<string>Full Power</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Instruments</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Rotate</string>
+					<key>action</key>
+					<string>Vr 55 KIAS 63 MPH</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Climb Speed</string>
+					<key>action</key>
+					<string>Vy 75 KIAS 85 MPH</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>SHORT FIELD</string>
+					<key>action</key>
+					<string></string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Flaps</string>
+					<key>action</key>
+					<string>Set 10°</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Runway</string>
+					<key>action</key>
+					<string>End of Runway</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Brakes</string>
+					<key>action</key>
+					<string>HOLD</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Throttle</string>
+					<key>action</key>
+					<string>Full Power</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Instruments</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Brakes</string>
+					<key>action</key>
+					<string>Release</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Rotate</string>
+					<key>action</key>
+					<string>Vr 52 KIAS 60 MPH</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Climb Speed to 50&apos;</string>
+					<key>action</key>
+					<string>Vx 59 KIAS 67 MPH</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Climb Speed after 50&apos; 75 KIAS 85 MPH</string>
+					<key>action</key>
+					<string>Check Rivets &amp; Skin</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>SOFT FIELD</string>
+					<key>action</key>
+					<string></string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Flaps</string>
+					<key>action</key>
+					<string>Set 10°</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Runway</string>
+					<key>action</key>
+					<string>Aligned</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Starting Roll</string>
+					<key>action</key>
+					<string>No Brakes, Pitch Up</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Throttle</string>
+					<key>action</key>
+					<string>Full Power</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Instruments</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Obstacle</string>
+					<key>action</key>
+					<string>Vx 59 KIAS 67 MPH</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>No Obstacle</string>
+					<key>action</key>
+					<string>Vy 75 KIAS 85 MPH</string>
+				</dict>
+			</array>
+			<array>
+				<dict>
+					<key>item</key>
+					<string>Airspeed</string>
+					<key>action</key>
+					<string>As Desired</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Power</string>
+					<key>action</key>
+					<string>Set</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Mixture</string>
+					<key>action</key>
+					<string>Lean</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Trim For Level Flight</string>
+					<key>action</key>
+					<string>Set</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Engine Instruments</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Vacuum / Ammeter</string>
+					<key>action</key>
+					<string>Check</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Heading Indicator</string>
+					<key>action</key>
+					<string>Reset</string>
+				</dict>
+				<dict>
+					<key>item</key>
+					<string>Comm / Navs</string>
+					<key>action</key>
+					<string>Set if Needed</string>
+				</dict>
+			</array>
+		</array>
+	</dict>
+</array>
 </plist>

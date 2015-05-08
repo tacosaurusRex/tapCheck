@@ -8,7 +8,7 @@
         <!--homeVC-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController title="home" modalTransitionStyle="flipHorizontal" id="vXZ-lx-hvc" userLabel="homeVC" customClass="ViewController" sceneMemberID="viewController">
+                <viewController title="Menu" modalTransitionStyle="flipHorizontal" id="vXZ-lx-hvc" userLabel="homeVC" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -37,6 +37,9 @@
                                 <state key="normal" title="Takeoff/Cruise">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="GkG-Yz-f0y" kind="show" id="GYD-yt-20N"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANL-B8-g1A">
                                 <rect key="frame" x="0.0" y="200" width="600" height="100"/>
@@ -46,6 +49,9 @@
                                 <state key="normal" title="Landing">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="RmR-kW-70j" kind="show" id="L17-62-nOv"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ekd-5O-a1P">
                                 <rect key="frame" x="0.0" y="300" width="600" height="100"/>
@@ -56,6 +62,9 @@
                                 <state key="normal" title="Emergency">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="Rn6-ad-hKr" kind="show" id="7sh-1A-rDf"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JIb-Tb-sdD">
                                 <rect key="frame" x="0.0" y="400" width="600" height="100"/>
@@ -65,6 +74,9 @@
                                 <state key="normal" title="Reference">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="X6l-pM-gFg" kind="show" id="DM3-Fn-BOg"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KvN-Bj-4RR">
                                 <rect key="frame" x="0.0" y="500" width="600" height="100"/>
@@ -121,13 +133,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1121" y="429"/>
+            <point key="canvasLocation" x="955" y="429"/>
         </scene>
-        <!--Table-->
+        <!--Preflight-->
         <scene sceneID="6eh-JD-JEc">
             <objects>
-                <tableViewController storyboardIdentifier="preflightTableView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WdG-lB-VRj" customClass="PreflightTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Ib7-ZP-PLn">
+                <tableViewController storyboardIdentifier="preflightTable" title="Preflight" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WdG-lB-VRj" customClass="PreflightTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" tag="10" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Ib7-ZP-PLn">
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -137,10 +149,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Table" id="qdy-sN-sb4"/>
+                    <connections>
+                        <outlet property="preflightTableView" destination="Ib7-ZP-PLn" id="tuF-BA-bGY"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6yO-5f-LBR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1831" y="429"/>
+            <point key="canvasLocation" x="1743" y="-80"/>
         </scene>
         <!--rootNav-->
         <scene sceneID="z8X-MJ-t8R">
@@ -158,7 +173,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NDW-f9-2HC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="599" y="429"/>
+            <point key="canvasLocation" x="283" y="429"/>
         </scene>
         <!--Section Header View Controller-->
         <scene sceneID="jMc-zq-KpR">
@@ -175,7 +190,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cnY-QD-x3J">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -193,12 +208,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qBA-2v-xLt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="887" y="982"/>
+            <point key="canvasLocation" x="277" y="-16"/>
         </scene>
-        <!--Options View Controller-->
+        <!--Options-->
         <scene sceneID="zyP-yf-jh8">
             <objects>
-                <viewController id="7Sp-uL-gQK" customClass="optionsViewController" sceneMemberID="viewController">
+                <viewController title="Options" id="7Sp-uL-gQK" customClass="optionsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JtE-va-uZc"/>
                         <viewControllerLayoutGuide type="bottom" id="OW0-Wv-NLq"/>
@@ -231,7 +246,86 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HtV-2E-RaI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1583" y="1182"/>
+            <point key="canvasLocation" x="283" y="1282"/>
+        </scene>
+        <!--Takeoff/Cruise-->
+        <scene sceneID="YIW-8o-dWy">
+            <objects>
+                <tableViewController storyboardIdentifier="takeoffTable" title="Takeoff/Cruise" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GkG-Yz-f0y" customClass="PreflightTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" tag="11" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="QY0-P4-Np7">
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="GkG-Yz-f0y" id="psP-ho-ftP"/>
+                            <outlet property="delegate" destination="GkG-Yz-f0y" id="G5z-nE-qao"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Table" id="lVe-ZB-Wif"/>
+                    <connections>
+                        <outlet property="takeoffTableView" destination="QY0-P4-Np7" id="Rxc-3T-V5i"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MSW-P7-zbT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2437" y="160"/>
+        </scene>
+        <!--Landing-->
+        <scene sceneID="cyR-WQ-TZk">
+            <objects>
+                <tableViewController storyboardIdentifier="landingTable" title="Landing" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RmR-kW-70j" customClass="PreflightTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" tag="13" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="JJq-iX-ed0">
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="RmR-kW-70j" id="SrT-7c-uBp"/>
+                            <outlet property="delegate" destination="RmR-kW-70j" id="Aqh-Ow-saS"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Table" id="K0M-dB-yws"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MpY-EX-Ssv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2437" y="878"/>
+        </scene>
+        <!--Emergency-->
+        <scene sceneID="kNV-4f-ath">
+            <objects>
+                <tableViewController storyboardIdentifier="emergencyTable" title="Emergency" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Rn6-ad-hKr" customClass="PreflightTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" tag="12" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="KPx-Nm-kWY">
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="Rn6-ad-hKr" id="m9G-9G-4bm"/>
+                            <outlet property="delegate" destination="Rn6-ad-hKr" id="cTk-2x-jFF"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Table" id="72l-zc-P9s"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f0j-5H-WJ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1743" y="664"/>
+        </scene>
+        <!--Reference-->
+        <scene sceneID="ewa-Rq-5xL">
+            <objects>
+                <tableViewController storyboardIdentifier="referenceTable" title="Reference" useStoryboardIdentifierAsRestorationIdentifier="YES" id="X6l-pM-gFg" customClass="PreflightTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="yFi-v8-XgJ">
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="X6l-pM-gFg" id="y2X-ue-cHg"/>
+                            <outlet property="delegate" destination="X6l-pM-gFg" id="d1d-o5-peM"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Table" id="5ak-Fh-6lq"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lbi-Y6-CSn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="955" y="1282"/>
         </scene>
     </scenes>
 </document>

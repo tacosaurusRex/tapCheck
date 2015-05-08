@@ -16,6 +16,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -41,5 +43,16 @@
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     [super viewWillDisappear:animated];
 }
+
+- (void)orientationChanged:(NSNotification *)notification {
+    // Respond to changes in device orientation
+}
+
+-(void) viewDidDisappear {
+    // Request to stop receiving accelerometer events and turn off accelerometer
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+}
+
 
 @end

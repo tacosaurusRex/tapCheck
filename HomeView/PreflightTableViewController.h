@@ -10,6 +10,10 @@
 #include "MyCustomCell.h"
 
 @interface PreflightTableViewController : UITableViewController
+
+@property (strong, nonatomic) IBOutlet UITableView *preflightTableView;
+@property (strong, nonatomic) IBOutlet UITableView *takeoffTableView;
+
 @property NSMutableArray * completedItems;
 @property NSMutableArray* completedItems0;
 @property NSMutableArray* completedItems1;
@@ -24,11 +28,13 @@
 @property int sectionComplete4;
 @property NSMutableArray * listArray;
 @property NSDictionary * rootDictionary;
+@property NSArray * plistArray;
 @property NSDictionary * preflightDictionary;
 @property NSArray * preflightArray;
 @property UIView * headerView;
 @property NSArray * sectionHeaderArray;
-@property (nonatomic,retain) NSMutableArray *sectionViewControllers;
+@property (nonatomic,retain) NSMutableArray *sectionVCArray;
+@property (nonatomic,retain) NSMutableArray *tableViewsArray;
 @property NSArray * itemsArray;
 @property NSArray * userStateArray;
 

@@ -12,7 +12,7 @@
 @interface PreflightTableViewController ()
 
 @property int sectionCount;
-
+@property int tableCount;
 @end
 
 @implementation PreflightTableViewController
@@ -25,18 +25,8 @@
     NSLog(@"I'm back in viewDidLoad.\n");
     
     self.tableView.rowHeight = 44;
-    _sectionCount = (int)[_itemsArray count];
-    _sectionViewControllers = [[NSMutableArray alloc] init];
-    int i;
-    for(i = 0 ; i < _sectionCount ; i++) {
-        SectionHeaderViewController *tmpSectionHeaderViewController =  [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"sectionHeader"];
-        
-        UILabel *tmpLabel = (UILabel *)[tmpSectionHeaderViewController.view viewWithTag:4];
-        tmpLabel.text = _sectionHeaderArray[i];
-        
-        [_sectionViewControllers addObject:tmpSectionHeaderViewController];
-    }
-    [self phaseComplete];
+    
+    //[self phaseComplete];
     NSLog(@"I'm done with viewDidLoad.\n");
 }
 
@@ -56,14 +46,12 @@
     _completedItems = [NSMutableArray arrayWithObjects:_completedItems0, _completedItems1, _completedItems2, _completedItems3, _completedItems4, nil];
 
     NSString *PlistPath = [[NSBundle mainBundle] pathForResource:@"list" ofType:@"plist"];
-    _rootDictionary = [[NSDictionary alloc] initWithContentsOfFile:PlistPath];
-    _preflightDictionary = [[NSDictionary alloc] initWithDictionary:[_rootDictionary objectForKey:@"Preflight"]];
-    _sectionHeaderArray = [[NSArray alloc] initWithObjects:[_preflightDictionary objectForKey:@"Sections"], nil][0];
-    _itemsArray = [[NSArray alloc] initWithObjects:[_preflightDictionary objectForKey:@"Items"], nil][0];
+    _plistArray = [[NSArray alloc] initWithContentsOfFile:PlistPath];
+    _tableCount = (int)[_plistArray count];
+    NSLog(@"Size of _plistArray is %d", _tableCount);
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:[self userStateFilePath]]) {
         _completedItems = [[NSMutableArray alloc] initWithContentsOfFile:[self userStateFilePath]];
-        NSLog(@"_completedItemsArray created from plist");
     }
     NSLog(@"Done with loadData.\n");
 }
@@ -71,7 +59,6 @@
 - (NSString *)userStateFilePath {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    //NSLog(@"The documents directory path is %@", [documentsDirectory stringByAppendingPathComponent:@"userState.plist"]);
     return [documentsDirectory stringByAppendingPathComponent:@"userState.plist"];
 }
 
@@ -82,28 +69,38 @@
 
 #pragma mark - Table view data source
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    MyCustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myCell"];
-    if (!cell) {
-        [tableView registerNib:[UINib nibWithNibName:@"MyCustomCell" bundle:nil] forCellReuseIdentifier:@"myCell"];
-        cell = [tableView dequeueReusableCellWithIdentifier:@"myCell"];
-    }
-
-    cell.itemLabel.text = [[[_itemsArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"item"];
-    cell.actionLabel.text = [[[_itemsArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"action"];
-
-    [cell setAccessoryType:UITableViewCellAccessoryNone];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"I am in cellForRow");
     
-    NSNumber *rowNum = [NSNumber numberWithUnsignedInteger:indexPath.row];
-    int i = (int)indexPath.section;
-    for ( i = 0 ; i < _sectionCount ; i++) {
-        if ( i == indexPath.section ) {
-            if ([_completedItems[i] containsObject:rowNum]) {
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    MyCustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myCell"];
+    
+    int i;
+    for ( i = 0 ; i < _tableCount ; i++ ) {
+    
+        if (tableView == [tableView viewWithTag:(i+10)]) {
+            
+            if (!cell) {
+                [tableView registerNib:[UINib nibWithNibName:@"MyCustomCell" bundle:nil] forCellReuseIdentifier:@"myCell"];
+                cell = [tableView dequeueReusableCellWithIdentifier:@"myCell"];
             }
-            else {
-                cell.accessoryType = UITableViewCellAccessoryNone;
+
+            cell.itemLabel.text = [[[[[_plistArray objectAtIndex:i] objectForKey:@"Items"] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"item"];
+            cell.actionLabel.text = [[[[[_plistArray objectAtIndex:i] objectForKey:@"Items"] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"action"];
+            
+            [cell setAccessoryType:UITableViewCellAccessoryNone];
+            
+            NSNumber *rowNum = [NSNumber numberWithUnsignedInteger:indexPath.row];
+            int i = (int)indexPath.section;
+            
+            for ( i = 0 ; i < _sectionCount ; i++) {
+                if ( i == indexPath.section ) {
+                    if ([_completedItems[i] containsObject:rowNum]) {
+                        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                    }
+                    else {
+                        cell.accessoryType = UITableViewCellAccessoryNone;
+                    }
+                }
             }
         }
     }
@@ -115,38 +112,44 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
     NSNumber *rowNumber = [NSNumber numberWithUnsignedInteger:indexPath.row];
-    
     NSLog(@"The clicked cell is in section %ld, row %ld.\n", (long)indexPath.section, (long)indexPath.row);
     
-    int i = (int)indexPath.section;
-    for ( i = 0 ; i < _sectionCount ; i++) {
-        if (i == indexPath.section) {
-            if (selectedCell.accessoryType == UITableViewCellAccessoryNone) {
-                selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
-                if ( [_completedItems[i] containsObject:rowNumber] )
-                { }
-                else { [_completedItems[i] addObject:rowNumber]; }
-            }
-            else if (selectedCell.accessoryType == UITableViewCellAccessoryCheckmark) {
-                selectedCell.accessoryType = UITableViewCellAccessoryNone;
-                if ( [_completedItems[i] containsObject:rowNumber] )
-                { [_completedItems[i] removeObject:rowNumber]; }
-            }
-            if ( [_completedItems[i] count] == [[_itemsArray objectAtIndex:indexPath.section] count]) {
-                SectionHeaderViewController  * tmpSectionVC = [_sectionViewControllers objectAtIndex:indexPath.section];
-                UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
-                tmpLabel.backgroundColor = [UIColor greenColor];
-            }
-            else {
-                SectionHeaderViewController  * tmpSectionVC = [_sectionViewControllers objectAtIndex:indexPath.section];
-                UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
-                tmpLabel.backgroundColor = [UIColor clearColor];
+    int t;
+    for ( t = 0 ; t < _tableCount ; t++ ) {
+        
+        if (tableView == [tableView viewWithTag:(t+10)]) {
+            
+            int i;
+            for ( i = 0 ; i < _sectionCount ; i++) {
+                if (i == indexPath.section) {
+                    if (selectedCell.accessoryType == UITableViewCellAccessoryNone) {
+                        selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
+                        if ( [_completedItems[i] containsObject:rowNumber] )
+                        { }
+                        else { [_completedItems[i] addObject:rowNumber]; }
+                    }
+                    else if (selectedCell.accessoryType == UITableViewCellAccessoryCheckmark) {
+                        selectedCell.accessoryType = UITableViewCellAccessoryNone;
+                        if ( [_completedItems[i] containsObject:rowNumber] )
+                        { [_completedItems[i] removeObject:rowNumber]; }
+                    }
+                    if ( [_completedItems[i] count] == [[[_plistArray objectAtIndex:t] objectForKey:@"items"] count] ) {
+                        SectionHeaderViewController  * tmpSectionVC = [_sectionVCArray objectAtIndex:indexPath.section];
+                        UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
+                        tmpLabel.backgroundColor = [UIColor greenColor];
+                    }
+                    else {
+                        SectionHeaderViewController  * tmpSectionVC = [_sectionVCArray objectAtIndex:indexPath.section];
+                        UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
+                        tmpLabel.backgroundColor = [UIColor clearColor];
+                    }
+                }
             }
         }
     }
-    [self phaseComplete];
+            //[self phaseComplete];
 }
-
+/*
 - (void) phaseComplete {
     
     //bool sectComp[_sectionCount];
@@ -155,7 +158,7 @@
     int i;
     for ( i = 0 ; i < _sectionCount ; i++ ) {
         //NSLog(@"completedItems[%d] count %lu, itemsArray[%d] count %lu", i, (unsigned long)[_completedItems[i] count], i, (unsigned long)[_itemsArray[i] count]);
-        if ([_completedItems[i] count] == [_itemsArray[i] count]) {
+        if ([_completedItems[i] count] == [[[_plistArray objectAtIndex:t] objectForKey:@"items"] count]) {
             [_sectionComplete addObject:[NSNumber numberWithInt:1]];
         }
         else {
@@ -172,18 +175,36 @@
         self.navigationController.navigationBar.barTintColor = nil;
     }
     //NSLog(@"the contents of _sectionComplete are %@", _sectionComplete);
-}
+}*/
 
 #pragma mark - Section / Header Attributes
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [_sectionViewControllers count];
+    int i;
+    int count = 0;
+    for (i = 0 ; i < _tableCount ; i++ ) {
+        if (tableView == [tableView viewWithTag:(i+10)]) {
+            count = (int)[[[_plistArray objectAtIndex:i] objectForKey:@"Sections"] count];
+        }
+    }
+    return count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[_itemsArray objectAtIndex:section] count];
+    //int t;// = (int)[tableView tag];
+    NSLog(@"I am in numberOfRowsInSection");
+    NSLog(@"section is %ld", (long)section);
+    int i;
+    int count = 0;
+    for ( i = 0 ; i < _tableCount ; i++ ) {
+        if (tableView == [tableView viewWithTag:(i+10)]) {
+            count = (int)[[[[_plistArray objectAtIndex:i] objectForKey:@"Items"] objectAtIndex:section] count];
+            NSLog(@"The number of rows in section %ld is %d", (long)section, (int)[[[[_plistArray objectAtIndex:i] objectForKey:@"Items"] objectAtIndex:section] count]);
+        }
+    }
+    return count;
 }
 
 - (CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section
@@ -193,20 +214,46 @@
 
 -(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 
-    SectionHeaderViewController *tmpVC =[_sectionViewControllers objectAtIndex:section];
-    
-    if ( [_completedItems[section] count] == [_itemsArray[section] count]) {
-        SectionHeaderViewController  * tmpSectionVC = [_sectionViewControllers objectAtIndex:section];
-        UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
-        tmpLabel.backgroundColor = [UIColor greenColor];
+    SectionHeaderViewController *tmpVC;
+    int t;
+    //int sectionCount = 0;
+    for ( t = 0 ; t < _tableCount ; t++ ) {
+        if (tableView == [tableView viewWithTag:(t+10)]) {
+            
+            tmpVC = [_sectionVCArray objectAtIndex:section];
+            
+            SectionHeaderViewController * tmpSectionVC = [_sectionVCArray objectAtIndex:section];
+            
+            if ([_completedItems[section] count] == (int)[[[_plistArray objectAtIndex:t] objectForKey:@"items"] count]) {
+                UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
+                tmpLabel.backgroundColor = [UIColor greenColor];
+            }
+            else {
+                UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
+                tmpLabel.backgroundColor = [UIColor clearColor];
+            }
+        }
     }
-    else {
-        SectionHeaderViewController  * tmpSectionVC = [_sectionViewControllers objectAtIndex:section];
-        UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
-        tmpLabel.backgroundColor = [UIColor clearColor];
-    }
-
     return tmpVC.view;
+}
+
+- (void) headerArray {
+    int i;
+    for(i = 0 ; i < _sectionCount ; i++) {
+        SectionHeaderViewController *tmpSectionHeaderViewController =  [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"sectionHeader"];
+        
+        UILabel *tmpLabel = (UILabel *)[tmpSectionHeaderViewController.view viewWithTag:4];
+        tmpLabel.text = _sectionHeaderArray[i];
+        
+        [_sectionVCArray addObject:tmpSectionHeaderViewController];
+    }
+    _tableViewsArray = [[NSMutableArray alloc] init];
+
+    NSLog(@"Table count is %d", _tableCount);
+    for (i = 0 ; i < _tableCount ; i++ ) {
+        UITableView *tmpTableView = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"preflightTable"];
+        [_tableViewsArray addObject:tmpTableView];
+    }
 }
 
 /*
