@@ -18,41 +18,45 @@
 @implementation PreflightTableViewController
 
 - (void)viewDidLoad {
-    NSLog(@"I am in viewDidLoad.\n");
-    self.title = @"Preflight";
+    NSLog(@"I'm in the tableViewController.");
     [super viewDidLoad];
+    [self setTableTitle:self.tableView];
     [self loadData];
-    NSLog(@"I'm back in viewDidLoad.\n");
-    
-    self.tableView.rowHeight = 44;
-    
-    //[self phaseComplete];
-    NSLog(@"I'm done with viewDidLoad.\n");
+    [self headerArray:self.tableView];
+    [self phaseComplete:self.tableView];
+    NSLog(@"I'm done with viewDidLoad.");
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)loadData {
     NSLog(@"I am in loadData.\n");
-    
-    _completedItems0 = [[NSMutableArray alloc] init];
-    _completedItems1 = [[NSMutableArray alloc] init];
-    _completedItems2 = [[NSMutableArray alloc] init];
-    _completedItems3 = [[NSMutableArray alloc] init];
-    _completedItems4 = [[NSMutableArray alloc] init];
-    _completedItems = [NSMutableArray arrayWithObjects:_completedItems0, _completedItems1, _completedItems2, _completedItems3, _completedItems4, nil];
-
     NSString *PlistPath = [[NSBundle mainBundle] pathForResource:@"list" ofType:@"plist"];
     _plistArray = [[NSArray alloc] initWithContentsOfFile:PlistPath];
     _tableCount = (int)[_plistArray count];
-    NSLog(@"Size of _plistArray is %d", _tableCount);
+
+    int i;
+    _completedItems = [[NSMutableArray alloc] init];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:[self userStateFilePath]]) {
+        NSLog(@"userState plist file exists");
         _completedItems = [[NSMutableArray alloc] initWithContentsOfFile:[self userStateFilePath]];
+        NSLog(@"creating root array from plist");
     }
+    else {
+        NSLog(@"userStateFile does not exist. Creating new array...");
+        for ( i = 0 ; i < _tableCount ; i++ ) {
+            [_completedItems addObject:[NSMutableArray new]];
+            int s;
+            NSLog(@"The item at _completedItems[i] is %@", _completedItems[i]);
+            for (s = 0 ; s < (int)[[[_plistArray objectAtIndex:i] objectForKey:@"Sections"] count] ; s++ ) {
+                [[_completedItems objectAtIndex:i] addObject:[NSMutableArray new]];
+            }
+        }
+    }
+    //NSLog(@"The contents of completedItems is %@", _completedItems);
     NSLog(@"Done with loadData.\n");
 }
 
@@ -70,14 +74,16 @@
 #pragma mark - Table view data source
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"I am in cellForRow");
     
+    //NSLog(@"I am in cellForRow");
     MyCustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myCell"];
     
     int i;
+    int t = (int)tableView.tag;
+    
     for ( i = 0 ; i < _tableCount ; i++ ) {
     
-        if (tableView == [tableView viewWithTag:(i+10)]) {
+        if (tableView == [tableView viewWithTag:i]) {
             
             if (!cell) {
                 [tableView registerNib:[UINib nibWithNibName:@"MyCustomCell" bundle:nil] forCellReuseIdentifier:@"myCell"];
@@ -92,14 +98,12 @@
             NSNumber *rowNum = [NSNumber numberWithUnsignedInteger:indexPath.row];
             int i = (int)indexPath.section;
             
-            for ( i = 0 ; i < _sectionCount ; i++) {
-                if ( i == indexPath.section ) {
-                    if ([_completedItems[i] containsObject:rowNum]) {
-                        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-                    }
-                    else {
-                        cell.accessoryType = UITableViewCellAccessoryNone;
-                    }
+            if (i == indexPath.section) {
+                if ([[_completedItems[t] objectAtIndex:i] containsObject:rowNum]) {
+                    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                }
+                else {
+                    cell.accessoryType = UITableViewCellAccessoryNone;
                 }
             }
         }
@@ -112,28 +116,34 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
     NSNumber *rowNumber = [NSNumber numberWithUnsignedInteger:indexPath.row];
-    NSLog(@"The clicked cell is in section %ld, row %ld.\n", (long)indexPath.section, (long)indexPath.row);
+    NSLog(@"Clicked cell is in section %d, row %d.\n", (int)indexPath.section, (int)indexPath.row);
     
-    int t;
+    int t = (int)(tableView.tag);
+    _sectionCount = (int)[[[_plistArray objectAtIndex:t] objectForKey:@"Sections"] count];
+
     for ( t = 0 ; t < _tableCount ; t++ ) {
         
-        if (tableView == [tableView viewWithTag:(t+10)]) {
+        if (tableView == [tableView viewWithTag:t]) {
             
             int i;
             for ( i = 0 ; i < _sectionCount ; i++) {
                 if (i == indexPath.section) {
-                    if (selectedCell.accessoryType == UITableViewCellAccessoryNone) {
-                        selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
-                        if ( [_completedItems[i] containsObject:rowNumber] )
-                        { }
-                        else { [_completedItems[i] addObject:rowNumber]; }
+                    
+                    if (selectedCell.accessoryType == UITableViewCellAccessoryNone) {               //IF selected cell does not have a check mark
+                        
+                        selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;             //ADD checkmark
+                        if ( ![[_completedItems[t] objectAtIndex:i] containsObject:rowNumber] ) {   //AND If completion array does not contain row
+                            [[_completedItems[t] objectAtIndex:i] addObject:rowNumber];             //ADD row to completion array
+                        }
                     }
-                    else if (selectedCell.accessoryType == UITableViewCellAccessoryCheckmark) {
-                        selectedCell.accessoryType = UITableViewCellAccessoryNone;
-                        if ( [_completedItems[i] containsObject:rowNumber] )
-                        { [_completedItems[i] removeObject:rowNumber]; }
+                    else if (selectedCell.accessoryType == UITableViewCellAccessoryCheckmark) {     //IF selected cell does have checkmark
+                        selectedCell.accessoryType = UITableViewCellAccessoryNone;                  //REMOVE Checkmark
+                        if ([[_completedItems[t] objectAtIndex:i] containsObject:rowNumber]) {      //AND if completion array contains row (as it should)
+                            [[_completedItems[t] objectAtIndex:i] removeObject:rowNumber];          //REMOVE row number from completion array.
+                        }
                     }
-                    if ( [_completedItems[i] count] == [[[_plistArray objectAtIndex:t] objectForKey:@"items"] count] ) {
+                    
+                    if ([[_completedItems[t] objectAtIndex:i] count] == [[[[_plistArray objectAtIndex:t] objectForKey:@"Items"] objectAtIndex:indexPath.section] count]) {
                         SectionHeaderViewController  * tmpSectionVC = [_sectionVCArray objectAtIndex:indexPath.section];
                         UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
                         tmpLabel.backgroundColor = [UIColor greenColor];
@@ -147,35 +157,49 @@
             }
         }
     }
-            //[self phaseComplete];
+    [self phaseComplete:self.tableView];
 }
-/*
-- (void) phaseComplete {
-    
-    //bool sectComp[_sectionCount];
-    _sectionComplete = [[NSMutableArray alloc] init];
-    
+
+- (void)phaseComplete:(UITableView *)tableView {
+    //NSLog(@"I'm in phaseComplete");
+    int t = (int)(tableView.tag);
     int i;
+    
+    _sectionCount = (int)[[[_plistArray objectAtIndex:t] objectForKey:@"Sections"] count];
+    
+    _sectionComplete = [[NSMutableArray alloc] init];
+    for ( i = 0 ; i < _tableCount ; i++ ) {
+        [_sectionComplete addObject:[NSMutableArray new]];
+    }
     for ( i = 0 ; i < _sectionCount ; i++ ) {
-        //NSLog(@"completedItems[%d] count %lu, itemsArray[%d] count %lu", i, (unsigned long)[_completedItems[i] count], i, (unsigned long)[_itemsArray[i] count]);
-        if ([_completedItems[i] count] == [[[_plistArray objectAtIndex:t] objectForKey:@"items"] count]) {
-            [_sectionComplete addObject:[NSNumber numberWithInt:1]];
+        if ([[_completedItems[t] objectAtIndex:i] count] == [[[[_plistArray objectAtIndex:t] objectForKey:@"Items"] objectAtIndex:i]count]) {
+            [_sectionComplete[t] addObject:[NSNumber numberWithInt:1]];
         }
         else {
-            [_sectionComplete addObject:[NSNumber numberWithInt:0]];
+            [_sectionComplete[t] addObject:[NSNumber numberWithInt:0]];
         }
     }
+    //NSLog(@"The contents of _sectionComplete[t] are %@", _sectionComplete[t]);
     
-    if(![_sectionComplete containsObject:[NSNumber numberWithInt:0]]) {
-        self.title = @"Preflight - Complete";
+    if(![_sectionComplete[t] containsObject:[NSNumber numberWithInt:0]]) {
+        //self.title = @"Preflight - Complete";
         self.navigationController.navigationBar.barTintColor = [UIColor greenColor];
     }
     else {
-        self.title = @"Preflight";
+        //self.title = @"Preflight";
         self.navigationController.navigationBar.barTintColor = nil;
     }
-    //NSLog(@"the contents of _sectionComplete are %@", _sectionComplete);
-}*/
+}
+
+- (void)setTableTitle:(UITableView *)tableView {
+    NSLog(@"tableView.tag is %d", (int)tableView.tag);
+    switch (tableView.tag) {
+        case 0 : self.title = @"Preflight"; break;
+        case 1 : self.title = @"Takeoff/Cruise"; break;
+        case 2 : self.title = @"Landing"; break;
+        case 3 : self.title = @"Emergency"; break;
+    }
+}
 
 #pragma mark - Section / Header Attributes
 
@@ -184,7 +208,7 @@
     int i;
     int count = 0;
     for (i = 0 ; i < _tableCount ; i++ ) {
-        if (tableView == [tableView viewWithTag:(i+10)]) {
+        if (tableView == [tableView viewWithTag:i]) {
             count = (int)[[[_plistArray objectAtIndex:i] objectForKey:@"Sections"] count];
         }
     }
@@ -193,38 +217,40 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //int t;// = (int)[tableView tag];
-    NSLog(@"I am in numberOfRowsInSection");
-    NSLog(@"section is %ld", (long)section);
     int i;
     int count = 0;
     for ( i = 0 ; i < _tableCount ; i++ ) {
-        if (tableView == [tableView viewWithTag:(i+10)]) {
+        if (tableView == [tableView viewWithTag:i]) {
             count = (int)[[[[_plistArray objectAtIndex:i] objectForKey:@"Items"] objectAtIndex:section] count];
-            NSLog(@"The number of rows in section %ld is %d", (long)section, (int)[[[[_plistArray objectAtIndex:i] objectForKey:@"Items"] objectAtIndex:section] count]);
         }
     }
     return count;
 }
 
-- (CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 44.0;
 }
 
--(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44.0;
+}
 
+-(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    NSLog(@"I'm in viewForHeader");
     SectionHeaderViewController *tmpVC;
-    int t;
-    //int sectionCount = 0;
-    for ( t = 0 ; t < _tableCount ; t++ ) {
-        if (tableView == [tableView viewWithTag:(t+10)]) {
-            
+    int i;
+    for ( i = 0 ; i < _tableCount ; i++ ) {
+        if (tableView == [tableView viewWithTag:i]) {
+            NSLog(@"The size of _sectionVCArray is %lu", [_sectionVCArray count]);
+            NSLog(@"The current table section is %d", (int)section);
             tmpVC = [_sectionVCArray objectAtIndex:section];
             
             SectionHeaderViewController * tmpSectionVC = [_sectionVCArray objectAtIndex:section];
             
-            if ([_completedItems[section] count] == (int)[[[_plistArray objectAtIndex:t] objectForKey:@"items"] count]) {
+            if ([[_completedItems[i] objectAtIndex:section] count] == (int)[[[[_plistArray objectAtIndex:i] objectForKey:@"Items"] objectAtIndex:section] count]) {
                 UILabel *tmpLabel = (UILabel *)[tmpSectionVC.view viewWithTag:4];
                 tmpLabel.backgroundColor = [UIColor greenColor];
             }
@@ -237,24 +263,23 @@
     return tmpVC.view;
 }
 
-- (void) headerArray {
+- (void) headerArray:(UITableView *)tableView
+{
+    NSLog(@"I'm in headerArray");
+    _sectionVCArray = [[NSMutableArray alloc] init];
+    
+    int t = (int)(tableView.tag);
+    _sectionCount = (int)[[[_plistArray objectAtIndex:t] objectForKey:@"Sections"] count];
+    
     int i;
-    for(i = 0 ; i < _sectionCount ; i++) {
-        SectionHeaderViewController *tmpSectionHeaderViewController =  [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"sectionHeader"];
-        
+    for ( i = 0 ; i < _sectionCount ; i++ ) {
+        SectionHeaderViewController *tmpSectionHeaderViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"sectionHeader"];
         UILabel *tmpLabel = (UILabel *)[tmpSectionHeaderViewController.view viewWithTag:4];
-        tmpLabel.text = _sectionHeaderArray[i];
-        
+        tmpLabel.text = [[[_plistArray objectAtIndex:t] objectForKey:@"Sections"] objectAtIndex:i];
         [_sectionVCArray addObject:tmpSectionHeaderViewController];
     }
-    _tableViewsArray = [[NSMutableArray alloc] init];
-
-    NSLog(@"Table count is %d", _tableCount);
-    for (i = 0 ; i < _tableCount ; i++ ) {
-        UITableView *tmpTableView = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"preflightTable"];
-        [_tableViewsArray addObject:tmpTableView];
-    }
 }
+
 
 /*
  // Override to support conditional editing of the table view.

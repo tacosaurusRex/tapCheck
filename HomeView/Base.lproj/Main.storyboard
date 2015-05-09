@@ -139,7 +139,7 @@
         <scene sceneID="6eh-JD-JEc">
             <objects>
                 <tableViewController storyboardIdentifier="preflightTable" title="Preflight" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WdG-lB-VRj" customClass="PreflightTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" tag="10" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Ib7-ZP-PLn">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Ib7-ZP-PLn">
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -155,7 +155,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6yO-5f-LBR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1743" y="-80"/>
+            <point key="canvasLocation" x="961" y="-272"/>
         </scene>
         <!--rootNav-->
         <scene sceneID="z8X-MJ-t8R">
@@ -252,7 +252,7 @@
         <scene sceneID="YIW-8o-dWy">
             <objects>
                 <tableViewController storyboardIdentifier="takeoffTable" title="Takeoff/Cruise" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GkG-Yz-f0y" customClass="PreflightTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" tag="11" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="QY0-P4-Np7">
+                    <tableView key="view" clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="QY0-P4-Np7">
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -268,13 +268,13 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MSW-P7-zbT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2437" y="160"/>
+            <point key="canvasLocation" x="1743" y="-272"/>
         </scene>
         <!--Landing-->
         <scene sceneID="cyR-WQ-TZk">
             <objects>
                 <tableViewController storyboardIdentifier="landingTable" title="Landing" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RmR-kW-70j" customClass="PreflightTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" tag="13" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="JJq-iX-ed0">
+                    <tableView key="view" clipsSubviews="YES" tag="2" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="JJq-iX-ed0">
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -287,13 +287,13 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MpY-EX-Ssv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2437" y="878"/>
+            <point key="canvasLocation" x="1743" y="497"/>
         </scene>
         <!--Emergency-->
         <scene sceneID="kNV-4f-ath">
             <objects>
                 <tableViewController storyboardIdentifier="emergencyTable" title="Emergency" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Rn6-ad-hKr" customClass="PreflightTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" tag="12" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="KPx-Nm-kWY">
+                    <tableView key="view" clipsSubviews="YES" tag="3" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="KPx-Nm-kWY">
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -306,7 +306,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f0j-5H-WJ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1743" y="664"/>
+            <point key="canvasLocation" x="1743" y="1282"/>
         </scene>
         <!--Reference-->
         <scene sceneID="ewa-Rq-5xL">
